@@ -1,9 +1,10 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import Game from './game';
+import '@/assets/css/base.css';
 
 createRoot(document.getElementById('app')!).render(
     <StrictMode>
-        <Game />
+        {/* <Game /> */}
+        <h1 className="text-4xl text-center">Hello, World!</h1>
     </StrictMode>
 );
