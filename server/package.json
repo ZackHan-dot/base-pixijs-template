@@ -2,20 +2,35 @@
   "name": "uno-server",
   "version": "1.0.0",
   "description": "uno server",
-  "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "build": "cross-env NODE_ENV=production rimraf dist && tsc",
+    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "dev": "cross-env NODE_ENV=development nodemon --watch src --exec ts-node src/index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@koa/multer": "^3.0.2",
+    "@koa/router": "^13.1.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
     "koa": "^2.15.3",
-    "koa-router": "^13.0.1",
-    "socket.io": "^4.8.1"
+    "koa-bodyparser": "^4.4.1",
+    "mysql2": "^3.12.0",
+    "reflect-metadata": "^0.2.2",
+    "routing-controllers": "^0.10.4",
+    "socket.io": "^4.8.1",
+    "typedi": "^0.10.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.9"
+    "@types/koa": "^2.15.0",
+    "@types/koa-bodyparser": "^4.3.12",
+    "@types/node": "^20",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3",
+    "typescript-transform-paths": "^3.5.3",
+    "rimraf": "^6.0.1"
   }
 }

@@ -10,7 +10,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useEffect, useRef, useState } from 'react';
-import io, { Socket } from 'socket.io-client';
+import { io, Socket } from 'socket.io-client';
 
 export default function UnoGame() {
     const socket = useRef<Socket>();
@@ -29,7 +29,8 @@ export default function UnoGame() {
 
     useEffect(() => {
         socket.current = io();
-        // 连接成功
+
+        // 连接服务器
         socket.current?.on('connect', () => {
             console.log('Connected to server');
         });

@@ -26,3 +26,7 @@ dist-ssr
 public/assets
 .assetpack
 src/**/manifest.json
+
+**/.env
+**/.env.*
+**/*.local
