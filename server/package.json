@@ -5,7 +5,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production rimraf dist && tsc",
     "start": "cross-env NODE_ENV=production node dist/index.js",
-    "dev": "cross-env NODE_ENV=development nodemon --watch src --exec ts-node src/index.ts"
+    "dev": "cross-env NODE_ENV=development nodemon --watch src --exec ts-node -r tsconfig-paths/register src/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -13,24 +13,39 @@
   "dependencies": {
     "@koa/multer": "^3.0.2",
     "@koa/router": "^13.1.0",
+    "@types/nodemailer": "^6.4.17",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.7",
+    "http-errors": "^2.0.0",
+    "jsonwebtoken": "^9.0.2",
     "koa": "^2.15.3",
     "koa-bodyparser": "^4.4.1",
+    "koa-logger": "^3.2.1",
+    "koa-passport": "^6.0.0",
     "mysql2": "^3.12.0",
+    "nodemailer": "^6.10.0",
+    "passport-jwt": "^4.0.1",
+    "passport-magic-login": "^1.2.2",
     "reflect-metadata": "^0.2.2",
     "routing-controllers": "^0.10.4",
+    "rxjs": "^7.8.1",
     "socket.io": "^4.8.1",
     "typedi": "^0.10.0",
-    "typeorm": "^0.3.20"
+    "typeorm": "^0.2.45",
+    "typeorm-typedi-extensions": "^0.4.1"
   },
   "devDependencies": {
     "@types/koa": "^2.15.0",
     "@types/koa-bodyparser": "^4.3.12",
+    "@types/koa-passport": "^6.0.3",
     "@types/node": "^20",
+    "@types/passport-jwt": "^4.0.1",
     "nodemon": "^3.1.9",
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.7.3",
     "typescript-transform-paths": "^3.5.3"
   }
