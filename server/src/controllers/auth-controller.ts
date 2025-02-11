@@ -1,14 +1,11 @@
 import { generateJwtToken, magicLogin } from '@/config/passport-config';
 import passport from 'koa-passport';
 import {
-    Body,
     Ctx,
     Get,
     JsonController,
     NotFoundError,
     Post,
-    Req,
-    Res,
     UseBefore,
 } from 'routing-controllers';
 import { Service } from 'typedi';
@@ -50,7 +47,8 @@ export class AuthController {
         if (!user) {
             throw new NotFoundError('未找到该用户');
         }
-        const token = generateJwtToken(user);
+        const userInfo = { id: user.id, email: user.email };
+        const token = generateJwtToken(userInfo);
 
         return { message: '登录成功', token };
     }

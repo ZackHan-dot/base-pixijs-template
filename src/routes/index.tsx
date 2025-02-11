@@ -3,6 +3,7 @@ import Community from '@/views/community';
 import Gamehall from '@/views/gamehall';
 import GameDetail from '@/views/gamehall/detail';
 import Home from '@/views/home';
+import Login from '@/views/login';
 import { Route, RouteObject } from 'react-router';
 
 type RouteObjectWithInfo = RouteObject & {
@@ -35,6 +36,11 @@ const routes: RouteObjectWithInfo[] = [
                 element: <Community />,
             },
         ],
+    },
+    {
+        path: '/auth/:type',
+        title: '登录',
+        element: <Login />,
     },
 ];
 

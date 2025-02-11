@@ -39,7 +39,8 @@ export const magicLogin = new MagicLoginStrategy({
         // Get or create a user with the provided email from the database
         try {
             const user = await getOrCreateUserWithEmail(payload.destination);
-            callback(null, user);
+            const userInfo = { id: user.id, email: user.email };
+            callback(null, userInfo);
         } catch (error: any) {
             callback(error);
         }
@@ -75,7 +76,7 @@ passport.use(
     })
 );
 
-export const generateJwtToken = (user: User) => {
+export const generateJwtToken = (user: { id: number; email: string }) => {
     return jwt.sign(
         { id: user.id, email: user.email },
         process.env.JWT_SECRET!,

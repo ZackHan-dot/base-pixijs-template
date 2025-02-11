@@ -12,9 +12,14 @@ export default defineConfig({
         open: true,
         proxy: {
             '/socket.io': {
-                target: 'http://localhost:3000',
+                target: 'http://localhost:4000',
                 changeOrigin: true,
                 ws: true,
+            },
+            '/api': {
+                target: 'http://localhost:4000',
+                changeOrigin: true,
+                rewrite: p => p.replace(/^\/api/, ''),
             },
         },
     },

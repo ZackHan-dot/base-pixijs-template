@@ -5,12 +5,14 @@ import { NavSecondary } from '@/components/nav-secondary';
 import {
     Sidebar,
     SidebarContent,
+    SidebarFooter,
     SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import { Button } from './ui/button';
 
 const data = {
     navSecondary: [
@@ -33,6 +35,8 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+    const navigate = useNavigate();
+    const handleLoginClick = () => navigate('/auth/login');
     return (
         <Sidebar variant="inset" {...props}>
             <SidebarHeader>
@@ -56,6 +60,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarContent>
                 <NavSecondary items={data.navSecondary} />
             </SidebarContent>
+            <SidebarFooter>
+                <Button onClick={handleLoginClick}>登录</Button>
+            </SidebarFooter>
         </Sidebar>
     );
 }
