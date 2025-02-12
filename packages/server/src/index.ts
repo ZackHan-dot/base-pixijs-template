@@ -7,6 +7,9 @@ import { routingConfigs } from '@/routes';
 import { SERVER_PORT } from '@/config';
 import { useConnection } from '@/connection';
 import passport from 'koa-passport';
+import http from 'http';
+import socketIo from 'socket.io'; // 引入 socket.io
+import { registrySocketService } from './socket';
 
 const createServer = async () => {
     const koa = new Koa();
@@ -18,10 +21,21 @@ const createServer = async () => {
     // 包括引入控制器
     useContainer(Container);
 
-    //创建和运行服务
-    const app = useKoaServer(koa, routingConfigs);
-    app.listen(SERVER_PORT);
-    console.log(`Server is up and running at port ${SERVER_PORT}`);
+    // 创建 HTTP 服务器
+    const server = http.createServer(koa.callback());
+
+    // 创建并配置 Socket.IO 实例
+    const io = new socketIo.Server(server);
+
+    // 注册 Socket.IO 服务
+    registrySocketService(io);
+
+    // 配置koa服务器
+    useKoaServer(koa, routingConfigs);
+
+    server.listen(SERVER_PORT, () => {
+        console.log(`Server is up and running at port ${SERVER_PORT}`);
+    });
 };
 
 createServer();
