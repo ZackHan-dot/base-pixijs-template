@@ -38,7 +38,7 @@ const routes: RouteObjectWithInfo[] = [
         ],
     },
     {
-        path: '/auth/:type',
+        path: '/auth/login/:type?',
         title: '登录',
         element: <Login />,
     },

@@ -6,3 +6,11 @@ export const loginWithEmail = (params: {
 }) => {
     return service.post('/api/auth/login', params);
 };
+
+export const loginWithEmailCallback = (params: { token: string }) => {
+    return service.get('/api/auth/login/callback', { params });
+};
+
+export const getUserProfile = () => {
+    return service.get('/api/user/profile');
+};

@@ -13,6 +13,9 @@ import {
 } from '@/components/ui/sidebar';
 import { Link, useNavigate } from 'react-router';
 import { Button } from './ui/button';
+import { useEffect, useState } from 'react';
+import { NavUser } from './nav-user';
+import { getUserProfile } from '@/api/auth';
 
 const data = {
     navSecondary: [
@@ -35,8 +38,27 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+    const [userInfo, setUserInfo] = useState<any>(() => {
+        const storedUserInfo = localStorage.getItem('userInfo');
+        return storedUserInfo ? JSON.parse(storedUserInfo) : {};
+    });
     const navigate = useNavigate();
     const handleLoginClick = () => navigate('/auth/login');
+
+    const handleGetUserProfile = async () => {
+        try {
+            const { data } = await getUserProfile();
+            setUserInfo(data);
+            localStorage.setItem('userInfo', JSON.stringify(data));
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        handleGetUserProfile();
+    }, [userInfo]);
+
     return (
         <Sidebar variant="inset" {...props}>
             <SidebarHeader>
@@ -61,7 +83,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <NavSecondary items={data.navSecondary} />
             </SidebarContent>
             <SidebarFooter>
-                <Button onClick={handleLoginClick}>登录</Button>
+                {Object.keys(userInfo).length > 0 ? (
+                    <NavUser user={userInfo} />
+                ) : (
+                    <Button onClick={handleLoginClick}>登录</Button>
+                )}
             </SidebarFooter>
         </Sidebar>
     );

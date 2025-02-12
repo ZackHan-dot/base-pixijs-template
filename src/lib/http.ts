@@ -1,5 +1,6 @@
-import { toast } from '@/hooks/use-toast';
+import { toast } from 'sonner';
 import axios from 'axios';
+import { clearAuthCache } from './utils';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
@@ -38,13 +39,11 @@ http.interceptors.response.use(
         // 对响应错误做些什么
         if (error.response && error.response.status === 401) {
             // 处理未授权错误，例如重定向到登录页面
+            clearAuthCache();
             window.location.href = '/auth/login';
+            return;
         }
-        toast({
-            variant: 'destructive',
-            title: '网络错误',
-            description: error.message,
-        });
+        toast.error(`网络错误：${error.message}`);
         return Promise.reject(error);
     }
 );

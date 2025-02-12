@@ -20,7 +20,7 @@ export const magicLogin = new MagicLoginStrategy({
     // "href" is your confirmUrl with the confirmation token,
     // for example "/auth/magiclogin/confirm?token=<longtoken>"
     sendMagicLink: async (destination, href) => {
-        const loginLink = `${process.env.MAGIC_LINK_PREFIX}:${process.env.SERVER_PORT}${href}`;
+        const loginLink = `${process.env.MAGIC_LINK_PREFIX}${href}`;
         await sendEmail({
             to: destination,
             subject: '登录链接',
@@ -82,7 +82,7 @@ export const generateJwtToken = (user: { id: number; email: string }) => {
         process.env.JWT_SECRET!,
         {
             algorithm: 'HS256',
-            expiresIn: '12h',
+            expiresIn: '15h',
         }
     );
 };
