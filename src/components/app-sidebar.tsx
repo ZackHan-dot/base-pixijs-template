@@ -57,7 +57,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
     useEffect(() => {
         handleGetUserProfile();
-    }, [userInfo]);
+    }, []);
 
     return (
         <Sidebar variant="inset" {...props}>
