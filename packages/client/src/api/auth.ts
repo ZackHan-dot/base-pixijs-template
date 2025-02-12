@@ -14,3 +14,7 @@ export const loginWithEmailCallback = (params: { token: string }) => {
 export const getUserProfile = () => {
     return service.get('/api/user/profile');
 };
+
+export const logout = () => {
+    return service.post('/api/auth/logout');
+};

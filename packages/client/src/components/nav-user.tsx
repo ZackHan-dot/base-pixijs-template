@@ -17,6 +17,8 @@ import {
     SidebarMenuItem,
     useSidebar,
 } from '@/components/ui/sidebar';
+import { clearAuthCache } from '@/lib/utils';
+import { logout } from '@/api/auth';
 
 export function NavUser({
     user,
@@ -28,6 +30,17 @@ export function NavUser({
     };
 }) {
     const { isMobile } = useSidebar();
+
+    const handleLogout = async () => {
+        try {
+            await logout();
+        } catch (error) {
+            console.error(error);
+        } finally {
+            clearAuthCache();
+            window.location.href = '/';
+        }
+    };
 
     return (
         <SidebarMenu>
@@ -86,7 +99,7 @@ export function NavUser({
                             </div>
                         </DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>
+                        <DropdownMenuItem onClick={handleLogout}>
                             <LogOut />
                             注销
                         </DropdownMenuItem>

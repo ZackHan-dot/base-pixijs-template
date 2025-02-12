@@ -6,6 +6,8 @@ import { getOrCreateUserWithEmail } from '@/helpers/auth';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import { getRepository } from 'typeorm';
 import { User } from '@/models/user-entity';
+import Container from 'typedi';
+import Redis from 'ioredis';
 
 // 配置 MagicLoginStrategy
 export const magicLogin = new MagicLoginStrategy({
@@ -64,6 +66,11 @@ const jwtOptions = {
 passport.use(
     new JwtStrategy(jwtOptions, async (jwtPayload, done) => {
         try {
+            const redisClient = Container.get<Redis>('redis');
+            const storedToken = await redisClient.get(`token:${jwtPayload.id}`);
+            if (!storedToken) {
+                return done(null, false);
+            }
             const user = await getRepository(User).findOne(jwtPayload.id);
             if (user) {
                 return done(null, user);

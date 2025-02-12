@@ -1,6 +1,7 @@
 import { generateJwtToken, magicLogin } from '@/config/passport-config';
 import passport from 'koa-passport';
 import {
+    Body,
     Ctx,
     Get,
     JsonController,
@@ -8,12 +9,16 @@ import {
     Post,
     UseBefore,
 } from 'routing-controllers';
-import { Service } from 'typedi';
+import { Inject, Service } from 'typedi';
 import { Context } from 'koa';
+import Redis from 'ioredis';
 
 @JsonController('/auth')
 @Service()
 export class AuthController {
+    @Inject('redis')
+    redis!: Redis;
+
     @Post('/login')
     @UseBefore((ctx: Context, next: (err?: any) => Promise<any>) => {
         const req = Object.assign(ctx.req, {
@@ -49,7 +54,16 @@ export class AuthController {
         }
         const userInfo = { id: user.id, email: user.email };
         const token = generateJwtToken(userInfo);
+        await this.redis.set(`token:${userInfo.id}`, token, 'EX', 60 * 60 * 15);
 
         return { message: '登录成功', token };
+    }
+
+    @Post('/logout')
+    @UseBefore(passport.authenticate('jwt', { session: false }))
+    async logout(@Ctx() ctx: Context) {
+        const authenticatedUser = ctx.state.user;
+        await this.redis.del(`token:${authenticatedUser.id}`);
+        return { message: '登出成功' };
     }
 }
