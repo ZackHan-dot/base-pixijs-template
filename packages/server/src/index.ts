@@ -10,14 +10,18 @@ import passport from 'koa-passport';
 import http from 'http';
 import socketIo from 'socket.io'; // 引入 socket.io
 import { registrySocketService } from './socket';
-import { useRedis } from './connection/redis';
+import { useRedisConnection } from './connection/redis';
+import logger from 'koa-logger';
 
 const createServer = async () => {
     const koa = new Koa();
 
     await useConnection(koa);
-    useRedis();
+    await useRedisConnection();
     koa.use(passport.initialize());
+
+    // 使用 koa-logger 中间件
+    koa.use(logger());
 
     // 重要：必须在所有routing-controllers操作前设置容器。
     // 包括引入控制器
