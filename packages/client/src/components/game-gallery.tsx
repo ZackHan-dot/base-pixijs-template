@@ -5,17 +5,20 @@ const GameGallery = () => {
     return (
         <div>
             <p className="text-xl mb-2 font-douyin-sans">游戏</p>
-            <div
-                className="inline-block bg-white border cursor-pointer"
-                onClick={() => navigate('/gamehall/uno')}
-            >
-                <img
-                    src="/UNO_Logo.svg"
-                    alt="Uno"
-                    className="w-[120px] m-2 object-cover"
-                />
-                <div className="bg-gray-600 text-white text-center p-2 mt-2">
-                    Uno
+            <div className="custom-grid">
+                <div
+                    className="relative cursor-pointer rounded-sm overflow-hidden h-fit"
+                    onClick={() => navigate('/gamehall/uno')}
+                >
+                    <img
+                        src="/UNO_Logo.png"
+                        alt="Uno"
+                        className="w-full object-cover"
+                    />
+                    <div className="bg-black text-white p-4">
+                        <p className="text-base font-douyin-sans">UNO</p>
+                        <p className="text-xs text-gray-600">经典的Uno游戏</p>
+                    </div>
                 </div>
             </div>
         </div>

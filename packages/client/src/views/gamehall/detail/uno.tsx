@@ -54,8 +54,8 @@ export default function UnoGame() {
         };
     }, []);
     return (
-        <div className="flex justify-center">
-            <Card className="w-[350px]">
+        <div className="bg-gray-800 h-full rounded-sm relative flex justify-center items-center">
+            <Card className="w-[350px] rounded-sm">
                 <CardHeader>
                     <CardTitle>Uno</CardTitle>
                     <CardDescription>

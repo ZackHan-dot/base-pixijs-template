@@ -8,6 +8,7 @@ import { getRepository } from 'typeorm';
 import { User } from '@/models/user-entity';
 import Container from 'typedi';
 import Redis from 'ioredis';
+import { EmailTemplate } from '@/constant/template';
 
 // 配置 MagicLoginStrategy
 export const magicLogin = new MagicLoginStrategy({
@@ -25,9 +26,9 @@ export const magicLogin = new MagicLoginStrategy({
         const loginLink = `${process.env.MAGIC_LINK_PREFIX}${href}`;
         await sendEmail({
             to: destination,
-            subject: '登录链接',
-            text: `本次登录链接为：${loginLink}`,
-            html: `<p>本次登录链接为：<a href="${loginLink}" target="_blank">${loginLink}</a></p>`,
+            subject: '[棋盘驿站] 点击此链接以确认您的电子邮件地址',
+            text: `点击此链接以确认您的电子邮件地址：${loginLink}`,
+            html: EmailTemplate(loginLink),
         });
     },
 

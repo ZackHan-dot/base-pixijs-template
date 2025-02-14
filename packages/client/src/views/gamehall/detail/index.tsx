@@ -10,7 +10,7 @@ export default function GameDetail() {
     const GameComponent = gameComponents[gameId!];
 
     return (
-        <div className="px-5 py-2">
+        <div className="px-5 py-2 h-full">
             {GameComponent ? <GameComponent /> : <p>未找到对应的游戏</p>}
         </div>
     );

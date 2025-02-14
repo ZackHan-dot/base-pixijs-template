@@ -92,3 +92,12 @@
     font-family: 'DouyinSans', PingFangSC, Open Sans, Helvetica Neue, Arial,
         Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif;
 }
+
+@layer components {
+    .custom-grid {
+        display: grid;
+        gap: 0 15px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 250px));
+        grid-auto-rows: auto;
+    }
+}
