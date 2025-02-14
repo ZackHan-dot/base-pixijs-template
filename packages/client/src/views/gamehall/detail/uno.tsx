@@ -54,44 +54,42 @@ export default function UnoGame() {
         };
     }, []);
     return (
-        <div className="bg-gray-800 h-full rounded-sm relative flex justify-center items-center">
-            <Card className="w-[350px] rounded-sm">
-                <CardHeader>
-                    <CardTitle>Uno</CardTitle>
-                    <CardDescription>
-                        风靡全球的纸牌游戏，支持2-10人游玩！！！
-                    </CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <form>
-                        <div className="grid w-full items-center gap-4">
-                            <div className="flex flex-col space-y-1.5">
-                                <Label htmlFor="name">昵称</Label>
-                                <Input
-                                    id="nickname"
-                                    name="nickname"
-                                    value={formData.nickname}
-                                    placeholder="请输入昵称"
-                                    onChange={handleChange}
-                                />
-                            </div>
-                            <div className="flex flex-col space-y-1.5">
-                                <Label htmlFor="framework">房间号</Label>
-                                <Input
-                                    id="roomId"
-                                    name="roomId"
-                                    value={formData.roomId}
-                                    placeholder="请输入房间号"
-                                    onChange={handleChange}
-                                />
-                            </div>
+        <Card className="w-[350px] rounded-sm">
+            <CardHeader>
+                <CardTitle>Uno</CardTitle>
+                <CardDescription>
+                    风靡全球的纸牌游戏，支持2-10人游玩！！！
+                </CardDescription>
+            </CardHeader>
+            <CardContent>
+                <form>
+                    <div className="grid w-full items-center gap-4">
+                        <div className="flex flex-col space-y-1.5">
+                            <Label htmlFor="name">昵称</Label>
+                            <Input
+                                id="nickname"
+                                name="nickname"
+                                value={formData.nickname}
+                                placeholder="请输入昵称"
+                                onChange={handleChange}
+                            />
                         </div>
-                    </form>
-                </CardContent>
-                <CardFooter className="flex justify-center">
-                    <Button>加入房间</Button>
-                </CardFooter>
-            </Card>
-        </div>
+                        <div className="flex flex-col space-y-1.5">
+                            <Label htmlFor="framework">房间号</Label>
+                            <Input
+                                id="roomId"
+                                name="roomId"
+                                value={formData.roomId}
+                                placeholder="请输入房间号"
+                                onChange={handleChange}
+                            />
+                        </div>
+                    </div>
+                </form>
+            </CardContent>
+            <CardFooter className="flex justify-center">
+                <Button>加入房间</Button>
+            </CardFooter>
+        </Card>
     );
 }
