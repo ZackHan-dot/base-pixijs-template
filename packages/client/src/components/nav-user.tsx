@@ -19,6 +19,7 @@ import {
 } from '@/components/ui/sidebar';
 import { clearAuthCache } from '@/lib/utils';
 import { logout } from '@/api/auth';
+import { useDispatch } from 'react-redux';
 
 export function NavUser({
     user,
@@ -30,6 +31,7 @@ export function NavUser({
     };
 }) {
     const { isMobile } = useSidebar();
+    const dispatch = useDispatch();
 
     const handleLogout = async () => {
         try {
@@ -37,6 +39,7 @@ export function NavUser({
         } catch (error) {
             console.error(error);
         } finally {
+            dispatch({ type: 'auth/logout' });
             clearAuthCache();
             window.location.href = '/';
         }

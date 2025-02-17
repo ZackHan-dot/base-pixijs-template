@@ -16,6 +16,7 @@ import { Button } from './ui/button';
 import { useEffect, useState } from 'react';
 import { NavUser } from './nav-user';
 import { getUserProfile } from '@/api/auth';
+import { useDispatch } from 'react-redux';
 
 const data = {
     navSecondary: [
@@ -44,11 +45,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     });
     const navigate = useNavigate();
     const handleLoginClick = () => navigate('/auth/login');
+    const dispatch = useDispatch();
 
     const handleGetUserProfile = async () => {
         try {
             const { data } = await getUserProfile();
             setUserInfo(data);
+            dispatch({
+                type: 'auth/login',
+                payload: {
+                    username: data?.username || '',
+                    email: data?.email || '',
+                },
+            });
             localStorage.setItem('userInfo', JSON.stringify(data));
         } catch (error) {
             console.error(error);
