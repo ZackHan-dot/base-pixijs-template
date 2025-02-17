@@ -26,8 +26,8 @@ export const magicLogin = new MagicLoginStrategy({
         const loginLink = `${process.env.MAGIC_LINK_PREFIX}${href}`;
         await sendEmail({
             to: destination,
-            subject: '[棋盘驿站] 点击此链接以确认您的电子邮件地址',
-            text: `点击此链接以确认您的电子邮件地址：${loginLink}`,
+            subject: '[MeSphere] Click this link to verify your email address',
+            text: `Click this link to confirm your email address: ${loginLink}`,
             html: EmailTemplate(loginLink),
         });
     },

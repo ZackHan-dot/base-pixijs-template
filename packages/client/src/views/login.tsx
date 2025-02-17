@@ -62,9 +62,9 @@ function LoginForm({
                 <form onSubmit={handleSubmit}>
                     <div className="flex flex-col gap-6">
                         <div className="flex flex-col items-center gap-2">
-                            <img className="w-[65px]" src="/logo.png" />
+                            <img className="w-[65px]" src="/logo.svg" />
                             <h1 className="text-xl font-bold">
-                                欢迎来到棋盘驿站
+                                Welcome to MeSphere !!!
                             </h1>
                         </div>
                         <div className="flex flex-col gap-6">
@@ -103,6 +103,25 @@ function LoginForm({
                             <Button type="submit" className="w-full">
                                 登录
                             </Button>
+                            <p className="text-xs text-center text-gray-500">
+                                未登录手机号验证后将自动注册登录，
+                                注册即表明你已同意
+                                <a
+                                    className="text-blue-600 px-1"
+                                    href="/terms"
+                                    target="_blank"
+                                >
+                                    用户协议
+                                </a>
+                                和
+                                <a
+                                    className="text-blue-600 px-1"
+                                    href="/privacy"
+                                    target="_blank"
+                                >
+                                    隐私政策
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </form>
