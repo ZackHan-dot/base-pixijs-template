@@ -64,7 +64,7 @@ function LoginForm({
                         <div className="flex flex-col items-center gap-2">
                             <img className="w-[65px]" src="/logo.svg" />
                             <h1 className="text-xl font-bold">
-                                Welcome to MeSphere !!!
+                                Welcome to HzyCoder !!!
                             </h1>
                         </div>
                         <div className="flex flex-col gap-6">

@@ -17,7 +17,7 @@ const routes: RouteObjectWithInfo[] = [
         children: [
             {
                 path: '/',
-                title: '首页',
+                title: '个人空间',
                 element: <Home />,
             },
             {

@@ -37,14 +37,16 @@ const Layout: React.FC = () => {
                                     <>
                                         <BreadcrumbItem>
                                             <BreadcrumbLink href="/">
-                                                首页
+                                                个人空间
                                             </BreadcrumbLink>
                                         </BreadcrumbItem>
                                         <BreadcrumbSeparator />
                                     </>
                                 ) : (
                                     <BreadcrumbItem>
-                                        <BreadcrumbPage>首页</BreadcrumbPage>
+                                        <BreadcrumbPage>
+                                            个人空间
+                                        </BreadcrumbPage>
                                     </BreadcrumbItem>
                                 )}
                                 {pathnames.map((value, index) => {

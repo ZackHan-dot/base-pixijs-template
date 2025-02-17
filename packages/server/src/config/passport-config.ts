@@ -26,7 +26,7 @@ export const magicLogin = new MagicLoginStrategy({
         const loginLink = `${process.env.MAGIC_LINK_PREFIX}${href}`;
         await sendEmail({
             to: destination,
-            subject: '[MeSphere] Click this link to verify your email address',
+            subject: '[HzyCoder] Click this link to verify your email address',
             text: `Click this link to confirm your email address: ${loginLink}`,
             html: EmailTemplate(loginLink),
         });

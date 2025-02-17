@@ -39,7 +39,18 @@
     "socket.io-client": "^4.8.1",
     "sonner": "^1.7.4",
     "tailwind-merge": "^2.6.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "@tailwindcss/typography": "^0.5.16",
+    "@tiptap/extension-code-block-lowlight": "^2.11.2",
+    "@tiptap/extension-highlight": "^2.11.2",
+    "@tiptap/extension-placeholder": "^2.11.2",
+    "@tiptap/extension-typography": "^2.11.2",
+    "@tiptap/pm": "^2.11.2",
+    "@tiptap/react": "^2.11.2",
+    "@tiptap/starter-kit": "^2.11.2",
+    "highlight.js": "^11.11.1",
+    "lowlight": "^3.3.0",
+    "remixicon": "^4.6.0"
   },
   "devDependencies": {
     "@assetpack/core": "^1.2.2",
@@ -59,5 +70,8 @@
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.18.2",
     "vite": "^6.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   }
 }
