@@ -1,11 +1,14 @@
 import socketIo from 'socket.io';
+import { registryUnoSocketService } from './uno';
 
 export const registrySocketService = (io: socketIo.Server) => {
     io.on('connection', socket => {
-        console.log('a user connected', socket.id);
+        console.log(`socket ${socket.id} connected`);
 
-        socket.on('disconnect', () => {
-            console.log('user disconnected', socket.id);
+        registryUnoSocketService(socket);
+
+        socket.on('disconnect', reason => {
+            console.log(`socket ${socket.id} disconnected due to ${reason}`);
         });
     });
 };
