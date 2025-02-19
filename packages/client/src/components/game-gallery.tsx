@@ -4,7 +4,7 @@ const GameGallery = () => {
     const navigate = useNavigate();
     return (
         <div>
-            <p className="text-xl mb-2 font-douyin-sans">游戏</p>
+            <p className="text-xl mb-2 font-source-han-sans">游戏</p>
             <div className="custom-grid">
                 <div
                     className="relative cursor-pointer rounded-sm overflow-hidden h-fit"
@@ -16,7 +16,7 @@ const GameGallery = () => {
                         className="w-full object-cover"
                     />
                     <div className="bg-black text-white p-4">
-                        <p className="text-base font-douyin-sans">UNO</p>
+                        <p className="text-base font-source-han-sans">UNO</p>
                         <p className="text-xs text-gray-600">经典的Uno游戏</p>
                     </div>
                 </div>

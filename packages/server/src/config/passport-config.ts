@@ -8,7 +8,7 @@ import { getRepository } from 'typeorm';
 import { User } from '@/models/user-entity';
 import Container from 'typedi';
 import Redis from 'ioredis';
-import { EmailTemplate } from '@/constant/template';
+import { EmailTemplate, REDIS_PREFIX } from '@/constant';
 
 // 配置 MagicLoginStrategy
 export const magicLogin = new MagicLoginStrategy({
@@ -68,7 +68,9 @@ passport.use(
     new JwtStrategy(jwtOptions, async (jwtPayload, done) => {
         try {
             const redisClient = Container.get<Redis>('redis');
-            const storedToken = await redisClient.get(`token:${jwtPayload.id}`);
+            const storedToken = await redisClient.get(
+                `${REDIS_PREFIX}:token:${jwtPayload.id}`
+            );
             if (!storedToken) {
                 return done(null, false);
             }

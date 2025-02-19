@@ -12,6 +12,7 @@ import {
 import { Inject, Service } from 'typedi';
 import { Context } from 'koa';
 import Redis from 'ioredis';
+import { REDIS_PREFIX } from '@/constant';
 
 @JsonController('/auth')
 @Service()
@@ -54,7 +55,12 @@ export class AuthController {
         }
         const userInfo = { id: user.id, email: user.email };
         const token = generateJwtToken(userInfo);
-        await this.redis.set(`token:${userInfo.id}`, token, 'EX', 60 * 60 * 15);
+        await this.redis.set(
+            `${REDIS_PREFIX}:token:${userInfo.id}`,
+            token,
+            'EX',
+            60 * 60 * 15
+        );
 
         return { message: '登录成功', token };
     }
@@ -63,7 +69,7 @@ export class AuthController {
     @UseBefore(passport.authenticate('jwt', { session: false }))
     async logout(@Ctx() ctx: Context) {
         const authenticatedUser = ctx.state.user;
-        await this.redis.del(`token:${authenticatedUser.id}`);
+        await this.redis.del(`${REDIS_PREFIX}:token:${authenticatedUser.id}`);
         return { message: '登出成功' };
     }
 }

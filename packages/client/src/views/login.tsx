@@ -104,7 +104,7 @@ function LoginForm({
                                 登录
                             </Button>
                             <p className="text-xs text-center text-gray-500">
-                                未登录手机号验证后将自动注册登录，
+                                未登录邮箱验证后将自动注册登录，
                                 注册即表明你已同意
                                 <a
                                     className="text-blue-600 px-1"

@@ -82,15 +82,52 @@
 }
 
 @font-face {
-    font-family: 'DouyinSans';
-    src: url('../fonts/DouyinSansBold.otf') format('opentype');
+    font-family: 'Source Han Sans';
+    src: url('../fonts/SourceHanSansSC-Normal.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
-.font-douyin-sans {
-    font-family: 'DouyinSans', PingFangSC, Open Sans, Helvetica Neue, Arial,
-        Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif;
+@font-face {
+    font-family: 'Source Han Sans';
+    src: url('../fonts/SourceHanSansSC-Bold.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Source Han Sans';
+    src: url('../fonts/SourceHanSansSC-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Source Han Sans';
+    src: url('../fonts/SourceHanSansSC-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Source Han Sans';
+    src: url('../fonts/SourceHanSansSC-Light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Source Han Sans';
+    src: url('../fonts/SourceHanSansSC-ExtraLight.otf') format('opentype');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Source Han Sans';
+    src: url('../fonts/SourceHanSansSC-Heavy.otf') format('opentype');
+    font-weight: 800;
+    font-style: normal;
 }
 
 @layer components {
@@ -100,4 +137,9 @@
         grid-template-columns: repeat(auto-fit, minmax(220px, 250px));
         grid-auto-rows: auto;
     }
+}
+
+.font-source-han-sans {
+    font-family: 'Source Han Sans';
+    font-weight: bold;
 }
