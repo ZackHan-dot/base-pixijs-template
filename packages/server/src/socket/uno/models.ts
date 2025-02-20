@@ -11,6 +11,7 @@ export interface Player {
 
 export interface Room {
     id: string;
+    hostId: string;
     status: 'waiting' | 'playing';
     players: Player[];
     currentPlayer: string;

@@ -41,7 +41,10 @@ export const magicLogin = new MagicLoginStrategy({
     verify: async (payload, callback) => {
         // Get or create a user with the provided email from the database
         try {
-            const user = await getOrCreateUserWithEmail(payload.destination);
+            const user = await getOrCreateUserWithEmail(
+                payload.destination,
+                payload.name
+            );
             const userInfo = { id: user.id, email: user.email };
             callback(null, userInfo);
         } catch (error: any) {

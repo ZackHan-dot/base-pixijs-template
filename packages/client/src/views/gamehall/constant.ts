@@ -21,3 +21,9 @@ export enum UNO {
     CHANGE_COLOR = 'UNO_CHANGE_COLOR', // 换色
     DECLARE = 'UNO_DECLARE', // 声明
 }
+
+export enum PLAYER_STATUS {
+    IDEA = 0,
+    JOINED_ROOM = 1,
+    IN_GAME = 2,
+}

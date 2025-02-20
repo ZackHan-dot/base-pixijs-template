@@ -21,26 +21,40 @@ export class AuthController {
     redis!: Redis;
 
     @Post('/login')
-    @UseBefore((ctx: Context, next: (err?: any) => Promise<any>) => {
+    @UseBefore(async (ctx: Context, next: (err?: any) => Promise<any>) => {
         const req = Object.assign(ctx.req, {
             body: ctx.request.body,
         }) as any;
         const res = Object.assign(ctx.res, {
-            json: (data: unknown) => {
+            json: (data: { success: boolean }) => {
                 ctx.set('Content-Type', 'application/json');
-                ctx.body = JSON.stringify(data);
+                if (!data?.success) {
+                    ctx.throw(500, '登录失败');
+                } else {
+                    ctx.body = data;
+                }
             },
             status: (code: number) => {
                 ctx.status = code;
                 return res;
             },
             send: (message: string) => {
-                ctx.body = message;
+                if (ctx.status >= 400) {
+                    ctx.throw(ctx.status, message);
+                } else {
+                    ctx.body = message;
+                }
             },
         }) as any;
 
-        magicLogin.send(req, res);
-        return next();
+        await magicLogin.send(req, res);
+
+        // 检查响应状态码，如果是成功状态码则直接结束响应
+        if (ctx.status === 200 || ctx.status === 201) {
+            ctx.res.end();
+        } else {
+            await next();
+        }
     })
     async login() {
         return { message: '发送登录邮件成功，请注意查收' };

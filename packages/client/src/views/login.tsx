@@ -74,7 +74,6 @@ function LoginForm({
                                     id="name"
                                     type="name"
                                     placeholder="您的大名"
-                                    required
                                     value={loginForm.name}
                                     onChange={e =>
                                         setLoginForm({
@@ -90,7 +89,6 @@ function LoginForm({
                                     id="email"
                                     type="email"
                                     placeholder="m@example.com"
-                                    required
                                     value={loginForm.email}
                                     onChange={e =>
                                         setLoginForm({
