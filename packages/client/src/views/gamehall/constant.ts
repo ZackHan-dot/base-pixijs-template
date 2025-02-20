@@ -1,7 +1,3 @@
-export enum GAME {
-    UNO = 'UNO',
-}
-
 export enum ROOM {
     INFO = 'ROOM_INFO', // 房间信息
     CREATE = 'ROOM_CREATE', // 创建房间

@@ -6,3 +6,7 @@ export const useRedisConnection = async () => {
     const redisClient = new Redis(REDIS_URL!);
     Container.set('redis', redisClient);
 };
+
+export const getRedisClient = () => {
+    return Container.get<Redis>('redis');
+};

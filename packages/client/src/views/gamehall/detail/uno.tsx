@@ -11,6 +11,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useEffect, useRef, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
+import { ROOM } from '../constant';
+import { useSelector } from 'react-redux';
 
 export default function UnoGame() {
     const socket = useRef<Socket>();
@@ -18,6 +20,9 @@ export default function UnoGame() {
         nickname: '',
         roomId: '',
     });
+    const userEmail = useSelector(
+        (state: { auth: { email: string } }) => state.auth.email
+    );
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -25,6 +30,16 @@ export default function UnoGame() {
             ...prevData,
             [name]: value,
         }));
+    };
+
+    const handleJoinRoom = () => {
+        socket.current?.emit(ROOM.JOIN, {
+            roomId: formData.roomId,
+            player: {
+                email: userEmail,
+                name: formData.nickname,
+            },
+        });
     };
 
     useEffect(() => {
@@ -88,7 +103,7 @@ export default function UnoGame() {
                 </form>
             </CardContent>
             <CardFooter className="flex justify-center">
-                <Button>加入房间</Button>
+                <Button onClick={handleJoinRoom}>加入房间</Button>
             </CardFooter>
         </Card>
     );
