@@ -11,11 +11,14 @@ const GameWrapper = ({ children }: { children: React.ReactNode }) => {
     const [isStartGame, setStartGame] = useState(false);
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="w-full h-full">
             {!isStartGame && (
-                <div className="flex justify-center items-center">
-                    <Button onClick={() => setStartGame(true)}>开始游戏</Button>
-                </div>
+                <Button
+                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                    onClick={() => setStartGame(true)}
+                >
+                    开始游戏
+                </Button>
             )}
             {isStartGame && children}
         </div>
@@ -28,7 +31,7 @@ export default function GameDetail() {
 
     return (
         <div className="px-5 py-2 h-full">
-            <div className="bg-gray-800 h-full rounded-sm relative flex justify-center items-center">
+            <div className="bg-gray-800 w-full h-full rounded-sm relative">
                 {GameComponent ? (
                     <GameWrapper>
                         <GameComponent />

@@ -49,7 +49,7 @@ export class AuthController {
 
         await magicLogin.send(req, res);
 
-        // 检查响应状态码，如果是成功状态码则直接结束响应
+        // HACK: 检查响应状态码，如果是成功状态码则直接结束响应
         if (ctx.status === 200 || ctx.status === 201) {
             ctx.res.end();
         } else {
