@@ -13,6 +13,7 @@ import { useEffect, useRef, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { PLAYER_STATUS, ROOM } from '../constant';
 import { useSelector } from 'react-redux';
+import RoomWait from '../components/room-wait';
 
 export default function UnoGame() {
     const socket = useRef<Socket>();
@@ -93,9 +94,9 @@ export default function UnoGame() {
         };
     }, []);
     return (
-        <div className="uno-game">
+        <div className="uno-game h-full">
             {playerStatus === PLAYER_STATUS.IDEA && (
-                <Card className="w-[350px] rounded-sm">
+                <Card className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[350px] rounded-sm">
                     <CardHeader>
                         <CardTitle>Uno</CardTitle>
                         <CardDescription>
@@ -133,23 +134,7 @@ export default function UnoGame() {
                     </CardFooter>
                 </Card>
             )}
-            {playerStatus === PLAYER_STATUS.JOINED_ROOM && (
-                <Card className="w-full rounded-sm">
-                    <CardHeader>
-                        <CardTitle>房间信息</CardTitle>
-                        <CardContent>
-                            <div>房间号：{roomInfo.id}</div>
-                            <div>房主：{roomInfo.hostId}</div>
-                            <div>房间状态：{roomInfo.status}</div>
-                            {roomInfo.players?.map(
-                                (player: { email: string }) => {
-                                    return <div key={player!.email}></div>;
-                                }
-                            )}
-                        </CardContent>
-                    </CardHeader>
-                </Card>
-            )}
+            {playerStatus === PLAYER_STATUS.JOINED_ROOM && <RoomWait />}
         </div>
     );
 }
