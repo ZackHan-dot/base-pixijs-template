@@ -55,7 +55,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 type: 'auth/login',
                 payload: {
                     username: data?.username || '',
-                    email: data?.email || '',
+                    id: data?.id || '',
+                    avatar: data?.avatar || '',
                 },
             });
             localStorage.setItem('userInfo', JSON.stringify(data));

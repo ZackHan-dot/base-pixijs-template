@@ -23,6 +23,9 @@ export class User {
     @Column({ unique: true })
     email!: string;
 
+    @Column({ nullable: true })
+    avatar!: string;
+
     @CreateDateColumn({ name: 'created_at' })
     createdAt!: Date;
 

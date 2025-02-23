@@ -45,7 +45,7 @@ export const magicLogin = new MagicLoginStrategy({
                 payload.destination,
                 payload.name
             );
-            const userInfo = { id: user.id, email: user.email };
+            const userInfo = { id: user.id, username: user.username };
             callback(null, userInfo);
         } catch (error: any) {
             callback(error);
@@ -89,9 +89,9 @@ passport.use(
     })
 );
 
-export const generateJwtToken = (user: { id: number; email: string }) => {
+export const generateJwtToken = (user: { id: number; username: string }) => {
     return jwt.sign(
-        { id: user.id, email: user.email },
+        { id: user.id, username: user.username },
         process.env.JWT_SECRET!,
         {
             algorithm: 'HS256',

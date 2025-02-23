@@ -21,15 +21,13 @@ export default function UnoGame() {
         nickname: '',
         roomId: '',
     });
-    const userEmail = useSelector(
-        (state: { auth: { email: string } }) => state.auth.email
-    );
+    const userInfo = useSelector((state: { auth: any }) => state.auth);
     const [playerStatus, setPlayerStatus] = useState<PLAYER_STATUS>(
         PLAYER_STATUS.IDEA
     );
     const [roomInfo, setRoomInfo] = useState({
         id: '',
-        hostId: '',
+        hostId: null,
         status: 'waiting',
         players: [],
         currentPlayer: '',
@@ -48,22 +46,19 @@ export default function UnoGame() {
     };
 
     const handleJoinRoom = () => {
-        socket.current?.emit(
-            ROOM.JOIN,
-            {
-                roomId: formData.roomId,
-                player: {
-                    email: userEmail,
-                    name: formData.nickname,
-                },
+        socket.current?.emit(ROOM.JOIN, {
+            roomId: formData.roomId,
+            player: {
+                id: userInfo?.id,
+                name: formData.nickname,
+                avatar: userInfo?.avatar,
             },
-            (response: { code: number }) => {
-                console.log(response, '加入房间响应');
-                if (!response.code) {
-                    setPlayerStatus(PLAYER_STATUS.JOINED_ROOM);
-                }
-            }
-        );
+        });
+    };
+
+    const handleStartGame = () => {
+        console.log('start game');
+        socket.current?.emit(ROOM.START, roomInfo.id);
     };
 
     useEffect(() => {
@@ -74,10 +69,24 @@ export default function UnoGame() {
             console.log('Connected to server');
         });
 
-        // 处理服务器发送的消息
+        // 服务器房间信息
         socket.current?.on(ROOM.INFO, data => {
             console.log('room info:', data);
-            setRoomInfo(data);
+            if (data?.type === 'join') {
+                setPlayerStatus(PLAYER_STATUS.JOINED_ROOM);
+            }
+            if (data?.room) {
+                setRoomInfo(data.room);
+            }
+        });
+
+        // 服务器开始游戏
+        socket.current?.on(ROOM.START, data => {
+            console.log('game start:', data);
+        });
+
+        socket.current?.on('error', error => {
+            console.error('Error:', error);
         });
 
         // 断开连接
@@ -90,6 +99,7 @@ export default function UnoGame() {
             socket.current?.disconnect();
             socket.current?.off('connect');
             socket.current?.off(ROOM.INFO);
+            socket.current?.off(ROOM.START);
             socket.current?.off('disconnect');
         };
     }, []);
@@ -134,7 +144,12 @@ export default function UnoGame() {
                     </CardFooter>
                 </Card>
             )}
-            {playerStatus === PLAYER_STATUS.JOINED_ROOM && <RoomWait />}
+            {playerStatus === PLAYER_STATUS.JOINED_ROOM && (
+                <RoomWait
+                    roomInfo={roomInfo}
+                    handleStartGame={handleStartGame}
+                />
+            )}
         </div>
     );
 }

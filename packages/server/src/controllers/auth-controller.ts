@@ -67,7 +67,7 @@ export class AuthController {
         if (!user) {
             throw new NotFoundError('未找到该用户');
         }
-        const userInfo = { id: user.id, email: user.email };
+        const userInfo = { id: user.id, username: user.username };
         const token = generateJwtToken(userInfo);
         await this.redis.set(
             `${REDIS_PREFIX}:token:${userInfo.id}`,

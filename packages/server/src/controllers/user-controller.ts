@@ -20,7 +20,7 @@ export class AppController {
         const userInfo = {
             id: user?.id,
             username: user?.username,
-            email: user?.email,
+            avatar: user?.avatar,
         };
         return {
             code: 0,
