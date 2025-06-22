@@ -205,11 +205,20 @@ yarn install
 
 2. **启动服务器**
    在 `server` 目录下运行：
+
     ```bash
     cd server
     npm run start
     ```
+
     默认访问地址：`http://localhost:3000`
+
+3. **yarn 工作区运行**
+
+```
+yarn workspace uno-client run dev
+yarn workspace uno-server run dev
+```
 
 #### 环境变量
 
